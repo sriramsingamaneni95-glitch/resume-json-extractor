@@ -1,7 +1,23 @@
 {
-  "name":"",
-  "email":"",
-  "phone":"",
-  "education":[],
-  "skills":[]
+  "name": "",
+  "email": "",
+  "phone": "",
+  "summary": "",
+  "skills": [],
+  "experience": [
+    {
+      "title": "",
+      "company": "",
+      "start_date": "",
+      "end_date": "",
+      "description": ""
+    }
+  ],
+  "education": [
+    {
+      "degree": "",
+      "institution": "",
+      "year": ""
+    }
+  ]
 }
