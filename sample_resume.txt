@@ -1,5 +1,5 @@
 Name: Sriram Singamaneni
 Email: sriram95@gmail.com
 Phone: +91 955088****
-Education: B.Tech CSE, SRM University AP
+Education: B.Tech CSE, SRM University AP , 2024
 Skills: Python, SQL, Machine Learning
