@@ -1,0 +1,1 @@
+Extract the resume into structured JSON. Return only valid JSON.
