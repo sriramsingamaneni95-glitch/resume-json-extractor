@@ -1,23 +1,19 @@
 {
-  "name": "",
-  "email": "",
-  "phone": "",
-  "summary": "",
-  "skills": [],
-  "experience": [
-    {
-      "title": "",
-      "company": "",
-      "start_date": "",
-      "end_date": "",
-      "description": ""
-    }
+  "name": "Sriram Singamaneni",
+  "email": "sriram95@gmail.com",
+  "phone": "+91 955088****,
+  "summary": "Computer Science graduate with AI and Machine Learning specialization.",
+  "skills": [
+    "Python",
+    "SQL",
+    "Machine Learning"
   ],
+  "experience": [],
   "education": [
     {
-      "degree": "",
-      "institution": "",
-      "year": ""
+      "degree": "B.Tech CSE",
+      "institution": "SRM University AP",
+      "year": "2024"
     }
   ]
 }
