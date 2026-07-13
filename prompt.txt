@@ -1,1 +1,25 @@
-Extract the resume into structured JSON. Return only valid JSON.
+Extract the following resume into structured JSON with this exact shape:
+
+{
+  "name": string,
+  "email": string,
+  "phone": string,
+  "summary": string,
+  "skills": [string],
+  "experience": [
+    {
+      "title": string,
+      "company": string,
+      "start_date": string,
+      "end_date": string,
+      "description": string
+    }
+  ],
+  "education": [
+    {
+      "degree": string,
+      "institution": string,
+      "year": string
+     }
+    }
+   }
