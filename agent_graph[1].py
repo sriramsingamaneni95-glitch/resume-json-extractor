@@ -1,12 +1,4 @@
-"""
-Minimal stateful agent graph — no external dependency (LangGraph-style,
-but hand-rolled so it's easy to read/inspect for an assignment).
 
-Each node is a function(state) -> state.
-Each router is a function(state) -> next_node_name (or "END").
-Routing decisions are made dynamically based on the shared AgentState,
-not a hardcoded linear sequence.
-"""
 from dataclasses import dataclass, field
 from typing import Callable, Optional, Any
 
