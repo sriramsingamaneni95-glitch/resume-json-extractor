@@ -1,25 +1,8 @@
-"""
-Planning Agent (Point 1): decides the extraction strategy before acting,
-instead of jumping straight into a single prompt.
-"""
+
 from openai import OpenAI
 from utils.logging_config import logger, log_call
 
 client = OpenAI()
-
-PLANNING_PROMPT = """You are a planning agent for a resume-processing pipeline.
-Given the raw resume text below, output a short JSON plan with these fields:
-- "is_scanned_or_messy": true/false (does text look OCR-garbled or poorly formatted?)
-- "has_multiple_pages": true/false
-- "language": detected language of the resume
-- "notes": any special handling needed (e.g. "dates in DD/MM/YYYY", "non-English section")
-
-Return ONLY valid JSON, nothing else.
-
-Resume text:
-{resume_text}
-"""
-
 
 @log_call
 def plan_extraction(resume_text: str) -> dict:
