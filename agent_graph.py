@@ -11,7 +11,7 @@ class AgentState:
 
     semantic_context: list = field(default_factory=list)
     plan: dict = field(default_factory=dict)
-    data: Optional[Any] = None                     # ResumeData once extracted
+    data: Optional[Any] = None                    
     raw_extraction_error: Optional[str] = None
     extraction_attempts: int = 0
 
@@ -20,7 +20,7 @@ class AgentState:
     match_result: Optional[Any] = None
     diff: Optional[dict] = None
 
-    log: list = field(default_factory=list)         # trace of nodes actually visited
+    log: list = field(default_factory=list)        
 
     def trace(self, node_name: str):
         self.log.append(node_name)
