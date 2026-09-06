@@ -1,9 +1,4 @@
-"""
-Extraction Agent — NOW WITH REAL OPENAI TOOL CALLING.
-The model itself decides when to call validate_email / parse_date /
-normalize_skill mid-generation, instead of us running those functions
-manually after the fact.
-"""
+
 import json
 from openai import OpenAI
 from pydantic import ValidationError
@@ -16,21 +11,6 @@ from utils.retry import clean_json_text, retry_on_failure
 from utils.logging_config import logger, log_call, log_token_usage
 
 client = OpenAI()
-
-SYSTEM_PROMPT = """You are a resume extraction agent. Extract structured data
-matching this JSON shape:
-{
-  "name": str, "email": str, "phone": str, "summary": str,
-  "skills": [str],
-  "experience": [{"company","title","start_date","end_date","description"}],
-  "education": [{"institution","degree","year"}],
-  "confidence_scores": {"name":0-1,"email":0-1,"phone":0-1,"skills":0-1,"experience":0-1,"education":0-1}
-}
-While extracting, USE THE PROVIDED TOOLS to validate the email you find,
-normalize every date you find, and normalize every skill name you find.
-Once you are done calling tools, respond with ONLY the final JSON object —
-no prose, no markdown fences.
-"""
 
 TOOLS = [
     {
@@ -113,7 +93,7 @@ def extract_resume_json(resume_text: str, plan: dict) -> ResumeData:
                     "tool_call_id": tool_call.id,
                     "content": json.dumps(result),
                 })
-            continue  # let the model see tool results and continue
+            continue  
 
         final_content = msg.content
         break
