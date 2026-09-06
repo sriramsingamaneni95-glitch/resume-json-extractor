@@ -1,6 +1,4 @@
-"""
-Observability (Point 15): structured logging with latency + token usage.
-"""
+
 import logging
 import time
 import functools
