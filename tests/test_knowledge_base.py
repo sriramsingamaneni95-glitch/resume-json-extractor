@@ -2,7 +2,7 @@ from knowledge_base import verify_entity
 
 
 def test_verify_known_company():
-    result = verify_entity("Googl", "company")  # slight typo
+    result = verify_entity("Googl", "company")  
     assert result["verified"] is True
     assert result["matched_to"] == "Google"
 
