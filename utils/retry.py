@@ -1,7 +1,4 @@
-"""
-Error handling / retries / malformed JSON recovery (Point 14).
-No external dependency needed - simple manual retry with backoff.
-"""
+
 import time
 import functools
 from utils.logging_config import logger
