@@ -1,4 +1,4 @@
-"""CLI entry point for TXT and PDF resumes."""
+
 import argparse
 import json
 from pathlib import Path
