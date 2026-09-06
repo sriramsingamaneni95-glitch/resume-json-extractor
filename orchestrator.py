@@ -14,16 +14,11 @@ from memory import save_version
 from semantic_memory import retrieve_similar, store_memory
 from utils.logging_config import logger
 
-
-# ---------- Nodes ----------
-
 def node_retrieve_memory(state: AgentState) -> AgentState:
-    """Retrieve semantically similar prior resumes to give the planner context."""
     try:
         state.semantic_context = retrieve_similar(state.resume_text, top_k=3)
         logger.info("Retrieved %d similar resume memories", len(state.semantic_context))
     except Exception as e:
-        # Memory enrichment must never block the core extraction pipeline.
         state.semantic_context = []
         logger.warning("Semantic memory retrieval skipped: %s", e)
     return state
@@ -38,7 +33,6 @@ def node_plan(state: AgentState) -> AgentState:
 
 
 def node_clean_text(state: AgentState) -> AgentState:
-    """Only reached when the planning agent flags the text as messy/OCR-like."""
     state.resume_text = re.sub(r"[^\x20-\x7E\n]+", " ", state.resume_text)
     logger.info("Cleaned messy/OCR-like text before extraction.")
     return state
@@ -68,12 +62,11 @@ def node_validate(state: AgentState) -> AgentState:
 
 def node_targeted_verification(state: AgentState) -> AgentState:
     state.data = verify_low_confidence_fields(state.data, state.resume_text, state.low_confidence_fields)
-    state.low_confidence_fields = needs_human_review(state.data)  # recheck after verification
+    state.low_confidence_fields = needs_human_review(state.data) 
     return state
 
 
 def node_score(state: AgentState) -> AgentState:
-    """Runs independent scoring tasks in PARALLEL instead of sequentially."""
     with ThreadPoolExecutor(max_workers=3) as ex:
         intel_future = ex.submit(compute_resume_intelligence, state.data)
         ats_future = ex.submit(compute_ats_score, state.resume_text, state.jd_text) if state.jd_text else None
@@ -88,7 +81,6 @@ def node_score(state: AgentState) -> AgentState:
 def node_memory(state: AgentState) -> AgentState:
     data = state.data.model_dump()
     state.diff = save_version(state.resume_name, data)
-    # Store a compact semantic representation after a successful run.
     summary = " ".join(filter(None, [state.data.summary, " ".join(state.data.skills)]))
     if not summary:
         summary = state.resume_text[:4000]
@@ -103,8 +95,6 @@ def node_memory(state: AgentState) -> AgentState:
     return state
 
 
-# ---------- Routers (the actual dynamic decision-making) ----------
-
 def router_plan(state: AgentState) -> str:
     return "clean_text" if state.plan.get("is_scanned_or_messy") else "extract"
 
@@ -117,7 +107,7 @@ def router_extract(state: AgentState) -> str:
     if state.raw_extraction_error and state.extraction_attempts < 3:
         return "extract"          # dynamic retry loop
     if state.raw_extraction_error:
-        return "END"              # give up after 3 failed attempts
+        return "END"              
     return "reflect"
 
 
