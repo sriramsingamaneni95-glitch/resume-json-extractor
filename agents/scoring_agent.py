@@ -1,7 +1,4 @@
-"""
-Scoring Agent (Points 12, 13): ATS score + resume intelligence
-(experience years, seniority, leadership signals, career progression).
-"""
+
 import re
 from datetime import datetime
 from openai import OpenAI
