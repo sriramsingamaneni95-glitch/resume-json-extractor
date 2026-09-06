@@ -1,7 +1,4 @@
-"""
-Lightweight RAG / Knowledge Base with PERSISTENT storage so the human
-feedback loop can permanently teach it new verified entities.
-"""
+
 import difflib
 import json
 from pathlib import Path
