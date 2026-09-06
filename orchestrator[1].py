@@ -1,18 +1,4 @@
-"""
-Orchestrator — now a REAL stateful agent graph with dynamic routing,
-instead of a fixed linear pipeline.
 
-Dynamic routing decisions actually made here:
-  - plan -> clean_text -> extract   IF plan flags the resume as messy/scanned
-  - plan -> extract                 otherwise
-  - extract -> extract (retry)      IF the model's JSON was malformed, up to 3x
-  - validate -> targeted_verification  IF any field confidence is low
-  - validate -> score               otherwise
-  - score node runs intelligence / ATS / JD-match IN PARALLEL (ThreadPoolExecutor)
-
-Run `result["agent_trace"]` after any pipeline run to see which path was
-actually taken for that specific resume - it's not always the same path.
-"""
 import re
 from concurrent.futures import ThreadPoolExecutor
 
