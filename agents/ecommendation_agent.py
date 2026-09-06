@@ -1,7 +1,4 @@
-"""
-Recommendation Agent (Point 11): Resume vs Job Description matching
-with a fit score and LLM-generated reasoning.
-"""
+"
 import json
 from openai import OpenAI
 from schema import ResumeData, MatchResult
@@ -9,17 +6,6 @@ from utils.retry import clean_json_text, retry_on_failure
 from utils.logging_config import log_call, log_token_usage
 
 client = OpenAI()
-
-MATCH_PROMPT = """Compare this candidate's resume data to the job description.
-Return ONLY JSON: {{"fit_score": 0-100, "reasoning": str,
-"matching_skills": [str], "missing_skills": [str]}}
-
-Resume data:
-{resume_json}
-
-Job description:
-{jd_text}
-"""
 
 
 @log_call
