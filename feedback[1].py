@@ -1,8 +1,4 @@
-"""
-Human feedback loop: when a human corrects a low-confidence field, persist
-the correction AND teach the knowledge base immediately, so future runs on
-similar resumes/entities benefit from it (agent memory actually updates).
-"""
+
 import json
 from pathlib import Path
 from knowledge_base import teach_entity
