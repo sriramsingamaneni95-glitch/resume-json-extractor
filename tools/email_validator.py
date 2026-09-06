@@ -1,4 +1,4 @@
-"""Tool: validate/clean an email address (Point 2)."""
+
 import re
 
 EMAIL_RE = re.compile(r"^[\w\.\+\-]+@[\w\-]+\.[a-zA-Z]{2,}$")
